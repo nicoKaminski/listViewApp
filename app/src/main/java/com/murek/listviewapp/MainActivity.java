@@ -17,8 +17,8 @@ import com.murek.listviewapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tv1;
-    private ListView lv1;
+    private ActivityMainBinding binding;
+
     private String nombres [] = {"Nico", "Ian", "Santi", "Gaston", "Daro", "Belen", "Barbara", "Pitu", "Maya", "Chille", "Johana"};
     private String edades [] = {"35", "8", "16", "36", "35", "37", "31", "82", "9", "12", "38"};
 
@@ -26,18 +26,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-
-        tv1 = findViewById(R.id.tv1);
-        lv1 = findViewById(R.id.lv1);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item_nombres, nombres);
-        lv1.setAdapter(adapter);
+        binding.lv1.setAdapter(adapter);
 
-        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                tv1.setText(nombres[position] + " tiene " + edades[position] + " años");
+                binding.tv1.setText(nombres[position] + " tiene " + edades[position] + " años");
             }
         });
     }
